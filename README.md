@@ -3,7 +3,7 @@
  The toolbox to collect posts from https://weibo.com
 
 ![](https://shields.io/badge/dependencies-Python_3.11-blue)
-![](https://shields.io/badge/dependencies-Google_Chrome_117-blue)
+![](https://shields.io/badge/dependencies-Google_Chrome_[117,130%29-blue)
 ![](https://shields.io/badge/OS-Windows_10_64--bit-lightgray)
 
 ## Debug
@@ -19,7 +19,7 @@ Contribution is open to Linux and other operation systems and browsers' login sc
 1. Searching non-Chinese strings will usually return nothing, because "Weibo" is a Chinese social media. 
 2. There are several hours' delay before posts appear in the search engine. It's better to search posts 2 days ago.
 
-## Usage
+## Install
 
 If it's the first time to use this program, please create a Python virtual environment and run
 
@@ -29,25 +29,24 @@ pip install -r requirements.txt
 
 In the minimum example, I assume the computer has installed Google Chrome in the default path. If Google Chrome is installed, but in the customized path, please run the following command and set `chrome_user_data` manually.
 
+## Usage
+
 Run `python login_windows.py` and follow the instructions in the command line. This step requires a graphic operation system, because the user have to open a web browser and login "weibo". Other steps can be implemented in a non-graphic operation system.
 
----
-
-**Minimum example**
-
-Search posts containing "GitHub" at 11:00-12:00 (UTC+8) on August 15, 2023. Retrieve at most 2 pages (10 posts per page).
-
-```bash
-python search.py --query="GitHub" --start_time=2023-08-15-11 --end_time=2023-08-15-12 --max_page=2
-```
-
----
-
-For more search options, see
-
-```bash
-python search.py --help
-```
+> [!NOTE]
+>
+> For example, to search posts containing "GitHub" at 11:00-12:00 (UTC+8) on August 15, 2023. Retrieve at most 2 pages (10 posts per page).
+>
+> ```bash
+> python search.py --query="GitHub" --start_time=2023-08-15-11 --end_time=2023-08-15-12 --max_page=2
+> ```
+>
+> For more search options, run the following command.
+>
+> ```bash
+> python search.py --help
+> ```
+>
 
 If the database path is by default, the results are saved in `posts.db` database.
 
@@ -74,7 +73,7 @@ The data structure of the search results:
 | source      | text | How the post author visits "weibo". It can be either the device name or the topic (tag) name. |
 | weibo_id    | text |                                                              |
 | content     | text | The main body of the post. This column of fast reposts will be empty. |
-| reposts     | text | Number of reposts. Chinese character "万" may appear in this field, as well as `comments` and `likes`, which means "muptiply 10,000". |
+| reposts     | text | Number of reposts. Chinese character "万" may appear in this field, as well as `comments` and `likes`, which means "multiply 10,000". |
 | comments    | text | Number of comments.                                          |
 | likes       | text | Number of likes.                                             |
 
