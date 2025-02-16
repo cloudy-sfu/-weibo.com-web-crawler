@@ -147,12 +147,12 @@ def search(db, query, start_time, end_time, max_page=None):
     meta = pd.DataFrame([{'query': query, 'start_time': start_time, 'end_time': end_time,
                           'table': table}])
     c = sqlite3.connect(db)
-    cookies = pd.read_sql_query('select * from cookies', c)
     meta.to_sql(name='search', con=c, index=False, if_exists='append')
     c.close()
 
-    cookies = dict(zip(cookies.name, cookies.value))
-    cookies = '; '.join([f'{k}={v}' for k, v in cookies.items()])
+    cookies = pd.read_csv("raw/cookies.csv")
+    cookies = [f"{row['name']}={row['value']}" for _, row in cookies.iterrows()]
+    cookies = '; '.join(cookies)
     with open("scripts/_https_header.json") as f:
         chrome_122 = json.load(f)
     chrome_122['Cookies'] = cookies
